@@ -1,5 +1,4 @@
-import Foundation
-import AppKit
+import Cocoa
 
 class ClipboardMonitor {
     private let pasteboard = NSPasteboard.general
@@ -13,14 +12,13 @@ class ClipboardMonitor {
     }
     
     func startMonitoring() {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
+        // 更频繁地检查剪贴板变化
+        timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { [weak self] _ in
             self?.checkForChanges()
         }
-    }
-    
-    func stopMonitoring() {
-        timer?.invalidate()
-        timer = nil
+        
+        // 确保定时器在主线程运行
+        RunLoop.main.add(timer!, forMode: .common)
     }
     
     private func checkForChanges() {
@@ -30,8 +28,15 @@ class ClipboardMonitor {
         lastChangeCount = currentCount
         
         if let text = pasteboard.string(forType: .string) {
-            let item = ClipboardItem(content: text, type: .text)
-            store.addItem(item)
+            DispatchQueue.main.async {
+                let item = ClipboardItem(content: text)
+                self.store.addItem(item)
+            }
         }
+    }
+    
+    func stopMonitoring() {
+        timer?.invalidate()
+        timer = nil
     }
 }

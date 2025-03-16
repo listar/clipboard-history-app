@@ -12,7 +12,7 @@ struct ClipboardItem: Identifiable, Codable {
         case file
     }
     
-    init(content: String, type: ItemType, id: UUID = UUID(), timestamp: Date = Date()) {
+    init(content: String, type: ItemType = .text, id: UUID = UUID(), timestamp: Date = Date()) {
         self.id = id
         self.content = content
         self.timestamp = timestamp
