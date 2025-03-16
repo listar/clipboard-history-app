@@ -1,0 +1,59 @@
+{
+  "": {
+    "swift-dependencies": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/master.swiftdeps"
+  },
+  "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/AppDelegate.swift": {
+    "dependencies": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/AppDelegate.d",
+    "object": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/AppDelegate.swift.o",
+    "swiftmodule": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/AppDelegate~partial.swiftmodule",
+    "swift-dependencies": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/AppDelegate.swiftdeps"
+  },
+  "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/ClipboardHistoryApp.swift": {
+    "dependencies": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryApp.d",
+    "object": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryApp.swift.o",
+    "swiftmodule": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryApp~partial.swiftmodule",
+    "swift-dependencies": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryApp.swiftdeps"
+  },
+  "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Models/ClipboardItem.swift": {
+    "dependencies": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardItem.d",
+    "object": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardItem.swift.o",
+    "swiftmodule": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardItem~partial.swiftmodule",
+    "swift-dependencies": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardItem.swiftdeps"
+  },
+  "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Services/ClipboardMonitor.swift": {
+    "dependencies": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardMonitor.d",
+    "object": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardMonitor.swift.o",
+    "swiftmodule": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardMonitor~partial.swiftmodule",
+    "swift-dependencies": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardMonitor.swiftdeps"
+  },
+  "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Services/ClipboardStore.swift": {
+    "dependencies": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardStore.d",
+    "object": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardStore.swift.o",
+    "swiftmodule": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardStore~partial.swiftmodule",
+    "swift-dependencies": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardStore.swiftdeps"
+  },
+  "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/ViewModels/ClipboardHistoryViewModel.swift": {
+    "dependencies": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryViewModel.d",
+    "object": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryViewModel.swift.o",
+    "swiftmodule": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryViewModel.swiftdeps"
+  },
+  "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Views/ClipboardHistoryView.swift": {
+    "dependencies": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryView.d",
+    "object": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryView.swift.o",
+    "swiftmodule": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryView~partial.swiftmodule",
+    "swift-dependencies": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryView.swiftdeps"
+  },
+  "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Views/PreferencesView.swift": {
+    "dependencies": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/PreferencesView.d",
+    "object": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/PreferencesView.swift.o",
+    "swiftmodule": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/PreferencesView~partial.swiftmodule",
+    "swift-dependencies": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/PreferencesView.swiftdeps"
+  },
+  "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/main.swift": {
+    "dependencies": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/main.d",
+    "object": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/main.swift.o",
+    "swiftmodule": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/main.swiftdeps"
+  }
+}

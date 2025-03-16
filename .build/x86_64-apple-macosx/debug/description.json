@@ -1,0 +1,590 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryAppPackageTests.xctest/Contents/MacOS/ClipboardHistoryAppPackageTests",
+      "packagePath" : "/Users/starmr./Code/AI/clipboard-history-app",
+      "productName" : "ClipboardHistoryAppPackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.ClipboardHistoryApp-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/sources",
+      "importPath" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/AppDelegate.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/ClipboardHistoryApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Models/ClipboardItem.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Services/ClipboardMonitor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Services/ClipboardStore.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/ViewModels/ClipboardHistoryViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Views/ClipboardHistoryView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Views/PreferencesView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/main.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/sources"
+        }
+      ],
+      "isLibrary" : false,
+      "moduleName" : "ClipboardHistoryApp",
+      "moduleOutputPath" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.swiftmodule",
+      "objects" : [
+        "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/AppDelegate.swift.o",
+        "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryApp.swift.o",
+        "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardItem.swift.o",
+        "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardMonitor.swift.o",
+        "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardStore.swift.o",
+        "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryViewModel.swift.o",
+        "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryView.swift.o",
+        "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/PreferencesView.swift.o",
+        "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/main.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "x86_64-apple-macosx11.0",
+        "-swift-version",
+        "5",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-Xfrontend",
+        "-entry-point-function-name",
+        "-Xfrontend",
+        "ClipboardHistoryApp_main",
+        "-color-diagnostics",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g"
+      ],
+      "outputFileMapPath" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/AppDelegate.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardItem.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardMonitor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardStore.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/PreferencesView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/main.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.swiftmodule"
+        }
+      ],
+      "sources" : [
+        "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/AppDelegate.swift",
+        "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/ClipboardHistoryApp.swift",
+        "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Models/ClipboardItem.swift",
+        "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Services/ClipboardMonitor.swift",
+        "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Services/ClipboardStore.swift",
+        "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/ViewModels/ClipboardHistoryViewModel.swift",
+        "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Views/ClipboardHistoryView.swift",
+        "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Views/PreferencesView.swift",
+        "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/main.swift"
+      ],
+      "tempsPath" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.ClipboardHistoryAppTests-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryAppTests.build/sources",
+      "importPath" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Tests/ClipboardTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryAppTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "ClipboardHistoryAppTests",
+      "moduleOutputPath" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryAppTests.swiftmodule",
+      "objects" : [
+        "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryAppTests.build/ClipboardTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "x86_64-apple-macosx13.0",
+        "-swift-version",
+        "5",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-color-diagnostics",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g"
+      ],
+      "outputFileMapPath" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryAppTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryAppTests.build/ClipboardTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryAppTests.swiftmodule"
+        }
+      ],
+      "sources" : [
+        "/Users/starmr./Code/AI/clipboard-history-app/Tests/ClipboardTests.swift"
+      ],
+      "tempsPath" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryAppTests.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "ClipboardHistoryApp" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "ClipboardHistoryApp",
+      "-incremental",
+      "-c",
+      "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/AppDelegate.swift",
+      "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/ClipboardHistoryApp.swift",
+      "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Models/ClipboardItem.swift",
+      "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Services/ClipboardMonitor.swift",
+      "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Services/ClipboardStore.swift",
+      "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/ViewModels/ClipboardHistoryViewModel.swift",
+      "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Views/ClipboardHistoryView.swift",
+      "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Views/PreferencesView.swift",
+      "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/main.swift",
+      "-I",
+      "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug",
+      "-target",
+      "x86_64-apple-macosx11.0",
+      "-swift-version",
+      "5",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-Xfrontend",
+      "-entry-point-function-name",
+      "-Xfrontend",
+      "ClipboardHistoryApp_main",
+      "-color-diagnostics",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "ClipboardHistoryAppTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "ClipboardHistoryAppTests",
+      "-incremental",
+      "-c",
+      "/Users/starmr./Code/AI/clipboard-history-app/Tests/ClipboardTests.swift",
+      "-I",
+      "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug",
+      "-target",
+      "x86_64-apple-macosx13.0",
+      "-swift-version",
+      "5",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j8",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-color-diagnostics",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.4.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "ClipboardHistoryApp" : [
+
+    ],
+    "ClipboardHistoryAppTests" : [
+      "ClipboardHistoryApp"
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+
+  },
+  "writeCommands" : {
+    "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp-entitlement.plist" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<entitlement-plist>"
+        },
+        {
+          "kind" : "virtual",
+          "name" : "<com.apple.security.get-task-allow>"
+        }
+      ],
+      "outputFilePath" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp-entitlement.plist"
+    },
+    "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/AppDelegate.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/ClipboardHistoryApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Models/ClipboardItem.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Services/ClipboardMonitor.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Services/ClipboardStore.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/ViewModels/ClipboardHistoryViewModel.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Views/ClipboardHistoryView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/Views/PreferencesView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Sources/ClipboardHistoryApp/main.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/sources"
+    },
+    "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/AppDelegate.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardItem.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardMonitor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardStore.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/PreferencesView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/main.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.product/Objects.LinkFileList"
+    },
+    "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryAppPackageTests.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/AppDelegate.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardHistoryViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardItem.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardMonitor.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/ClipboardStore.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/PreferencesView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryApp.build/main.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryAppTests.build/ClipboardTests.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryAppPackageTests.product/Objects.LinkFileList"
+    },
+    "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryAppTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/starmr./Code/AI/clipboard-history-app/Tests/ClipboardTests.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/ClipboardHistoryAppTests.build/sources"
+    },
+    "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/starmr./Code/AI/clipboard-history-app/.build/x86_64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}
