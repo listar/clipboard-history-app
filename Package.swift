@@ -18,10 +18,6 @@ let package = Package(
             name: "ClipboardHistoryApp",
             dependencies: [],
             path: "Sources/ClipboardHistoryApp"
-        ),
-        .testTarget(
-            name: "ClipboardHistoryAppTests",
-            dependencies: ["ClipboardHistoryApp"]
         )
     ]
 )
