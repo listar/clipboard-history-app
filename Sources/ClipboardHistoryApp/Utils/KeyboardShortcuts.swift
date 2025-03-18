@@ -4,6 +4,7 @@ class KeyboardShortcuts {
     static let shared = KeyboardShortcuts()
     private var eventMonitor: Any?
     private var handler: (() -> Void)?
+    private var escHandler: (() -> Void)?
     
     func register(handler: @escaping () -> Void) {
         self.handler = handler
@@ -16,11 +17,11 @@ class KeyboardShortcuts {
                event.keyCode == 9 { // V key
                 self?.handler?()
             }
-            // Check for ESC key
-            if event.keyCode == 53 { // ESC key
-                self?.handler?()
-            }
         }
+    }
+    
+    func registerEscHandler(handler: @escaping () -> Void) {
+        self.escHandler = handler
     }
     
     func unregister() {

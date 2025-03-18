@@ -23,7 +23,7 @@ class TabStore: ObservableObject {
     
     private init() {
         // 创建默认标签
-        let defaultTab = TabItem(id: Self.defaultTabId, name: "默认", isDefault: true)
+        let defaultTab = TabItem(id: Self.defaultTabId, name: "Clipboard History", isDefault: true)
         tabs = [defaultTab]
         loadTabs()
         loadTabItems() // 加载标签项目数据

@@ -18,6 +18,12 @@ struct ClipboardHistoryView: View {
                 SearchBar(text: $searchText)
                     .frame(width: (NSScreen.main?.frame.width ?? 800) / 3)
                     .padding(.horizontal, 16)
+                    .onTapGesture {
+                        NSLog("搜索栏容器被点击")
+                    }
+                    .onAppear {
+                        NSLog("搜索栏出现")
+                    }
                 
                 // 修改分隔线逻辑，只在非默认标签时显示
                 if selectedTabId != TabStore.defaultTabId {
@@ -86,10 +92,15 @@ struct ClipboardHistoryView: View {
         .alert("新建标签", isPresented: $showingNewTabAlert) {
             TextField("标签名称", text: $newTabName)
                 .frame(width: 200)  // 设置输入框宽度
+                .onChange(of: newTabName) { newValue in
+                    NSLog("弹窗输入框文本变化: \(newValue)")
+                }
             Button("取消", role: .cancel) {
+                NSLog("弹窗取消按钮点击")
                 newTabName = ""
             }
             Button("确定") {
+                NSLog("弹窗确定按钮点击")
                 if (!newTabName.isEmpty) {
                     tabStore.addTab(name: newTabName)
                     newTabName = ""
@@ -107,7 +118,7 @@ struct ClipboardHistoryView: View {
                 if filteredItems.isEmpty {
                     Text("无剪贴板记录")
                         .foregroundColor(.secondary)
-                        .frame(width: 300, height: 240)
+                        .frame(width: 300, height: 180)
                         .background(Color.white)
                         .cornerRadius(8)
                         .padding()
