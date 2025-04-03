@@ -7,6 +7,7 @@ struct ClipboardItemView: View {
     @State private var isHovered = false
     @ObservedObject private var store = ClipboardStore.shared
     
+    // 文本类型时，使用懒加载方式获取字符数
     private var characterCount: String? {
         if case .text(let string) = item.type {
             return "\(string.count)个字符"
@@ -33,39 +34,7 @@ struct ClipboardItemView: View {
             }
         } label: {
             VStack(alignment: .leading, spacing: 12) {
-                Group {
-                    switch item.type {
-                    case .text(let string):
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(string)
-                                .lineLimit(6)
-                                .multilineTextAlignment(.leading)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                            
-                            Text(characterCount ?? "")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
-                    case .image(let image):
-                        Image(nsImage: image)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    case .file(let urls):
-                        VStack(alignment: .leading, spacing: 4) {
-                            ForEach(urls, id: \.self) { url in
-                                Text(url.lastPathComponent)
-                                    .lineLimit(1)
-                            }
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    case .other(let type):
-                        Text("[\(type)]")
-                            .lineLimit(1)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    }
-                }
-                .foregroundColor(.primary)
+                itemContent
                 
                 Text(RelativeTimeFormatter.format(item.timestamp))
                     .font(.caption)
@@ -109,6 +78,96 @@ struct ClipboardItemView: View {
                 onDelete: { store.removeItem(item) }
             )
         }
+    }
+    
+    // 将内容部分提取出来，优化性能
+    private var itemContent: some View {
+        Group {
+            switch item.type {
+            case .text(let string):
+                OptimizedTextView(text: string, characterCount: characterCount)
+            case .image(let image):
+                OptimizedImageView(image: image)
+            case .file(let urls):
+                OptimizedFileView(urls: urls)
+            case .other(let type):
+                Text("[\(type)]")
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            }
+        }
+        .foregroundColor(.primary)
+    }
+}
+
+// 优化文本显示
+struct OptimizedTextView: View {
+    let text: String
+    let characterCount: String?
+    
+    // 对长文本进行截断处理，避免渲染过多内容
+    private var displayText: String {
+        if text.count > 1000 {
+            return String(text.prefix(1000)) + "..."
+        }
+        return text
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(displayText)
+                .lineLimit(6)
+                .multilineTextAlignment(.leading)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            
+            if let count = characterCount {
+                Text(count)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+        }
+    }
+}
+
+// 优化图片显示
+struct OptimizedImageView: View {
+    let image: NSImage
+    
+    var body: some View {
+        Image(nsImage: image)
+            .resizable()
+            .scaledToFit()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+// 优化文件显示
+struct OptimizedFileView: View {
+    let urls: [URL]
+    
+    // 限制显示的文件数量
+    private var displayUrls: [URL] {
+        Array(urls.prefix(5))
+    }
+    
+    private var hasMoreFiles: Bool {
+        urls.count > 5
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            ForEach(displayUrls, id: \.self) { url in
+                Text(url.lastPathComponent)
+                    .lineLimit(1)
+            }
+            
+            if hasMoreFiles {
+                Text("还有\(urls.count - 5)个文件...")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
 }
 

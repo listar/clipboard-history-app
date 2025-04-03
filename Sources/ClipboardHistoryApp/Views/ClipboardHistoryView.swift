@@ -8,6 +8,12 @@ struct ClipboardHistoryView: View {
     @State private var showingNewTabAlert = false  // 改回使用 Alert
     @State private var newTabName = ""
     @State private var selectedTabId: UUID? = TabStore.defaultTabId
+    @State private var draggingItem: ClipboardItem? = nil
+    
+    init() {
+        // 确保TabStore的selectedTabId与View中的同步
+        TabStore.shared.selectedTabId = TabStore.defaultTabId
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -46,6 +52,7 @@ struct ClipboardHistoryView: View {
                                     .cornerRadius(4)
                                     .onTapGesture {
                                         selectedTabId = tab.id
+                                        tabStore.selectedTabId = tab.id
                                         NSLog("切换到标签: \(tab.name), ID: \(tab.id)")
                                     }
                                     .contextMenu {
@@ -53,6 +60,7 @@ struct ClipboardHistoryView: View {
                                             tabStore.removeTab(tab)
                                             if selectedTabId == tab.id {
                                                 selectedTabId = TabStore.defaultTabId
+                                                tabStore.selectedTabId = TabStore.defaultTabId
                                                 NSLog("标签被删除，切换到默认标签")
                                             }
                                         }
@@ -66,6 +74,7 @@ struct ClipboardHistoryView: View {
                                     .cornerRadius(4)
                                     .onTapGesture {
                                         selectedTabId = tab.id
+                                        tabStore.selectedTabId = tab.id
                                         NSLog("切换到默认标签, ID: \(tab.id)")
                                     }
                             }
@@ -96,6 +105,23 @@ struct ClipboardHistoryView: View {
         .background(Color(hex: "E7E7E7"))
         .onAppear {
             NSLog("剪贴板历史视图出现，当前标签ID: \(selectedTabId?.uuidString ?? "nil")")
+            
+            // 确保TabStore的selectedTabId与View中的同步
+            tabStore.selectedTabId = selectedTabId
+            
+            // 重置并加载第一页数据
+            if selectedTabId == TabStore.defaultTabId {
+                store.resetAndReload()
+            }
+        }
+        .onChange(of: selectedTabId) { newValue in
+            // 同步TabStore的selectedTabId
+            tabStore.selectedTabId = newValue
+            
+            // 切换标签时，重置并加载数据
+            if newValue == TabStore.defaultTabId {
+                store.resetAndReload()
+            }
         }
         .alert("新建标签", isPresented: $showingNewTabAlert) {
             TextField("标签名称", text: $newTabName)
@@ -131,8 +157,33 @@ struct ClipboardHistoryView: View {
                         .cornerRadius(8)
                         .padding()
                 } else {
-                    ForEach(filteredItems) { item in
-                        ClipboardItemView(item: item)
+                    // 根据是否为自定义标签决定是否启用拖拽功能
+                    if let selectedId = selectedTabId, !tabStore.isDefaultTab(selectedId) && searchText.isEmpty {
+                        // 自定义标签且非搜索状态时使用可拖拽的视图
+                        ForEach(filteredItems) { item in
+                            ClipboardItemView(item: item)
+                                .opacity(draggingItem?.id == item.id ? 0.5 : 1.0)
+                                .onDrag {
+                                    // 设置正在拖拽的项目
+                                    self.draggingItem = item
+                                    return NSItemProvider(object: item.id.uuidString as NSString)
+                                }
+                                .onDrop(of: [.text], delegate: ItemDropDelegate(item: item, 
+                                                                               items: filteredItems, 
+                                                                               draggingItem: $draggingItem, 
+                                                                               tabId: selectedId, 
+                                                                               tabStore: tabStore))
+                        }
+                    } else {
+                        // 默认标签或搜索状态使用普通视图
+                        ForEach(filteredItems) { item in
+                            ClipboardItemView(item: item)
+                        }
+                        
+                        // 仅在默认标签且未进行搜索时添加加载更多功能
+                        if selectedTabId == TabStore.defaultTabId && searchText.isEmpty {
+                            loadMoreView
+                        }
                     }
                 }
             }
@@ -149,29 +200,66 @@ struct ClipboardHistoryView: View {
     }
     
     private var filteredItems: [ClipboardItem] {
-        let items = if selectedTabId == TabStore.defaultTabId {
-            store.items  // 显示系统剪贴板项目
+        if selectedTabId == TabStore.defaultTabId {
+            return searchText.isEmpty ? store.items : store.filteredItems(with: searchText)
         } else {
-            tabStore.getItems(for: selectedTabId)  // 显示特定标签的项目
+            let items = tabStore.getItems(for: selectedTabId)
+            
+            if searchText.isEmpty {
+                return items
+            }
+            
+            // 在标签中的所有项目中搜索，而不仅限于当前显示的项目
+            return tabStore.searchInTab(selectedTabId, searchText: searchText)
         }
-        
-        if searchText.isEmpty {
-            return items
-        }
-        return items.filter { item in
-            switch item.type {
-            case .text(let string):
-                return string.localizedCaseInsensitiveContains(searchText)
-            case .file(let urls):
-                return urls.map { $0.lastPathComponent }
-                    .joined(separator: ", ")
-                    .localizedCaseInsensitiveContains(searchText)
-            case .image:
-                return "图片".localizedCaseInsensitiveContains(searchText)
-            case .other(let type):
-                return type.localizedCaseInsensitiveContains(searchText)
+    }
+    
+    // 加载更多视图
+    private var loadMoreView: some View {
+        Group {
+            if store.isLoading {
+                // 加载中状态显示加载指示器
+                ProgressView()
+                    .frame(width: 100, height: 180)
+                    .background(Color.white)
+                    .cornerRadius(8)
+            } else if store.hasMoreData {
+                // 还有更多数据时显示加载按钮
+                Button(action: {
+                    store.loadNextPage()
+                }) {
+                    VStack {
+                        Image(systemName: "arrow.clockwise")
+                            .font(.system(size: 20))
+                        Text("加载更多")
+                            .font(.caption)
+                    }
+                    .frame(width: 100, height: 180)
+                    .background(Color.white)
+                    .cornerRadius(8)
+                    .foregroundColor(.primary)
+                }
+                .buttonStyle(PlainButtonStyle())
+                .onAppear {
+                    // 当视图出现在屏幕上时自动加载
+                    if !store.isLoading && store.hasMoreData {
+                        store.loadNextPage()
+                    }
+                }
             }
         }
+    }
+}
+
+// EnvironmentKey扩展 - 用于在环境中传递选中的标签ID
+private struct SelectedTabIdKey: EnvironmentKey {
+    static let defaultValue: UUID? = TabStore.defaultTabId
+}
+
+extension EnvironmentValues {
+    var selectedTabId: UUID? {
+        get { self[SelectedTabIdKey.self] }
+        set { self[SelectedTabIdKey.self] = newValue }
     }
 }
 
@@ -183,6 +271,12 @@ struct ClipboardItemContextMenu: View {
     
     var body: some View {
         Button("删除", role: .destructive, action: onDelete)
+        
+        if let selectedTabId = tabStore.selectedTabId, !tabStore.isDefaultTab(selectedTabId) {
+            Button("从当前标签移除") {
+                tabStore.removeItemFromTab(item, tabId: selectedTabId)
+            }
+        }
         
         if !tabStore.tabs.isEmpty {
             Divider()
@@ -246,4 +340,35 @@ extension NSView {
 
 #Preview {
     ClipboardHistoryView()
+}
+
+// 拖放委托处理
+struct ItemDropDelegate: DropDelegate {
+    let item: ClipboardItem
+    let items: [ClipboardItem]
+    @Binding var draggingItem: ClipboardItem?
+    let tabId: UUID
+    let tabStore: TabStore
+    
+    func performDrop(info: DropInfo) -> Bool {
+        draggingItem = nil
+        return true
+    }
+    
+    func dropEntered(info: DropInfo) {
+        // 确保有正在拖拽的项目
+        guard let draggingItem = draggingItem,
+              let fromIndex = items.firstIndex(where: { $0.id == draggingItem.id }),
+              let toIndex = items.firstIndex(where: { $0.id == item.id }) else {
+            return
+        }
+        
+        // 如果项目位置没有变，则不做任何操作
+        if fromIndex == toIndex {
+            return
+        }
+        
+        // 处理重新排序
+        tabStore.moveItem(in: tabId, from: IndexSet(integer: fromIndex), to: toIndex > fromIndex ? toIndex + 1 : toIndex)
+    }
 }

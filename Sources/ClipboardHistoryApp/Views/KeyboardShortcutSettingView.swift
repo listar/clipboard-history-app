@@ -11,7 +11,7 @@ struct KeyboardShortcutSettingView: View {
             Text("键盘快捷键设置")
                 .font(.headline)
                 .padding(.bottom, 12)
-                .padding(.top, 10)
+                .padding(.top, 20)
 
             
             ForEach(ShortcutAction.allCases) { action in

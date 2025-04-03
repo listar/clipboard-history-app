@@ -22,12 +22,6 @@ struct PreferencesView: View {
             }
             .padding()
             
-            Button("关闭") {
-                if let window = NSApp.windows.first(where: { $0.title == "首选项" }) {
-                    window.orderOut(nil)
-                }
-            }
-            .padding(.bottom)
         }
         .frame(width: 450, height: 380)
     }

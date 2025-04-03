@@ -35,25 +35,6 @@ Clipboard History 是一个轻量级的macOS剪贴板历史管理工具，允许
 3. 将Clipboard History拖拽到Applications文件夹
 4. 从Applications文件夹或Launchpad启动应用
 
-### 方法2：从源码构建
-
-1. 克隆仓库
-   ```bash
-   git clone https://github.com/listar/clipboard-history-app.git
-   cd clipboard-history-app
-   ```
-
-2. 构建应用
-   ```bash
-   ./scripts/package.sh
-   ```
-
-3. 打开生成的DMG文件（在`build-XXXXXXXXXX`目录中）并安装
-
-4. 如需Xcode开发环境，使用以下命令生成
-   ```bash
-   swift package generate-xcodeproj
-   ```
 
 ## 系统要求
 

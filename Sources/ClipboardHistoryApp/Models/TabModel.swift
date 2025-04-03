@@ -15,6 +15,7 @@ struct TabItem: Identifiable, Codable {
 class TabStore: ObservableObject {
     static let shared = TabStore()
     @Published var tabs: [TabItem] = []
+    @Published var selectedTabId: UUID? = defaultTabId
     private let saveKey = "clipboard.tabs"
     static let defaultTabId = UUID(uuidString: "E621E1F8-C36C-495A-93FC-0C247A3E6E5F")!
     
@@ -76,13 +77,59 @@ class TabStore: ObservableObject {
         if tabItems[tabId] == nil {
             tabItems[tabId] = []
         }
-        tabItems[tabId]?.append(item)
-        saveTabItems()
-        objectWillChange.send() // 通知UI更新
+        
+        // 检查是否已存在相同内容的项目
+        if let index = tabItems[tabId]?.firstIndex(where: { $0.hasSameContent(as: item) }) {
+            // 如果已存在，将其移动到最前面
+            if index > 0 {
+                var items = tabItems[tabId]!
+                let existingItem = items.remove(at: index)
+                items.insert(existingItem, at: 0)
+                tabItems[tabId] = items
+                saveTabItems()
+                objectWillChange.send() // 通知UI更新
+            }
+            NSLog("项目内容已存在于标签中，已移至最前")
+        } else {
+            // 不存在则添加到最前面
+            tabItems[tabId]?.insert(item, at: 0)
+            saveTabItems()
+            objectWillChange.send() // 通知UI更新
+            NSLog("新项目已添加到标签")
+        }
     }
     
     func getItemsForTab(_ tabId: UUID) -> [ClipboardItem] {
         return tabItems[tabId] ?? []
+    }
+    
+    // 移动项目位置（拖拽排序）
+    func moveItem(in tabId: UUID, from source: IndexSet, to destination: Int) {
+        guard !isDefaultTab(tabId),
+              var items = tabItems[tabId],
+              !items.isEmpty else {
+            return
+        }
+        
+        items.move(fromOffsets: source, toOffset: destination)
+        tabItems[tabId] = items
+        saveTabItems()
+        objectWillChange.send() // 通知UI更新
+    }
+    
+    // 判断是否为默认标签（系统剪贴板）
+    func isDefaultTab(_ tabId: UUID) -> Bool {
+        return tabId == Self.defaultTabId
+    }
+    
+    // 从标签中移除项目
+    func removeItemFromTab(_ item: ClipboardItem, tabId: UUID) {
+        guard var items = tabItems[tabId] else { return }
+        
+        items.removeAll { $0.id == item.id }
+        tabItems[tabId] = items
+        saveTabItems()
+        objectWillChange.send() // 通知UI更新
     }
     
     private func saveTabs() {
@@ -110,6 +157,43 @@ class TabStore: ObservableObject {
             NSLog("返回自定义标签项目: \(tabId?.uuidString ?? "nil")")
             return tabItems[tabId!] ?? []
         }
+    }
+    
+    // 在指定标签中搜索内容
+    func searchInTab(_ tabId: UUID?, searchText: String) -> [ClipboardItem] {
+        guard !searchText.isEmpty else {
+            return getItems(for: tabId)
+        }
+        
+        // 获取要搜索的项目列表
+        let itemsToSearch: [ClipboardItem]
+        if tabId == Self.defaultTabId || tabId == nil {
+            // 在默认标签（系统剪贴板）中搜索时，使用ClipboardStore的搜索方法
+            return ClipboardStore.shared.filteredItems(with: searchText)
+        } else if let items = tabItems[tabId!] {
+            itemsToSearch = items
+        } else {
+            return []
+        }
+        
+        // 执行搜索
+        let filtered = itemsToSearch.filter { item in
+            switch item.type {
+            case .text(let string):
+                return string.localizedCaseInsensitiveContains(searchText)
+            case .file(let urls):
+                return urls.map { $0.lastPathComponent }
+                    .joined(separator: ", ")
+                    .localizedCaseInsensitiveContains(searchText)
+            case .image:
+                return "图片".localizedCaseInsensitiveContains(searchText)
+            case .other(let type):
+                return type.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+        
+        NSLog("在标签中搜索 '\(searchText)' 找到 \(filtered.count) 个结果")
+        return filtered
     }
     
     private func saveTabItems() {
