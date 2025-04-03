@@ -16,7 +16,7 @@ class TabStore: ObservableObject {
     static let shared = TabStore()
     @Published var tabs: [TabItem] = []
     private let saveKey = "clipboard.tabs"
-    static let defaultTabId = UUID()  // 默认标签的固定 ID
+    static let defaultTabId = UUID(uuidString: "E621E1F8-C36C-495A-93FC-0C247A3E6E5F")!
     
     private var tabItems: [UUID: [ClipboardItem]] = [:]
     private let itemsKey = "clipboard.tab.items"
@@ -28,10 +28,31 @@ class TabStore: ObservableObject {
         loadTabs()
         loadTabItems() // 加载标签项目数据
         
-        // 确保默认标签始终存在
-        if (!tabs.contains(where: { $0.isDefault })) {
+        // 确保默认标签始终存在，并且ID是固定的
+        if !tabs.contains(where: { $0.isDefault }) {
             tabs.insert(defaultTab, at: 0)
             saveTabs()
+        } else {
+            // 确保默认标签的ID始终是defaultTabId
+            for i in 0..<tabs.count {
+                if tabs[i].isDefault && tabs[i].id != Self.defaultTabId {
+                    NSLog("修复默认标签ID")
+                    tabs.removeAll { $0.isDefault }
+                    tabs.insert(defaultTab, at: 0)
+                    saveTabs()
+                    break
+                }
+                
+                // 确保默认标签名称为"默认"
+                if tabs[i].isDefault && tabs[i].name != "默认" {
+                    NSLog("修复默认标签名称")
+                    var fixedTab = tabs[i]
+                    fixedTab.name = "默认"
+                    tabs[i] = fixedTab
+                    saveTabs()
+                    break
+                }
+            }
         }
     }
     
@@ -80,11 +101,14 @@ class TabStore: ObservableObject {
     
     // 获取指定标签或默认标签的项目
     func getItems(for tabId: UUID?) -> [ClipboardItem] {
-        if let tabId = tabId {
-            return tabItems[tabId] ?? []
-        } else {
-            // 返回默认标签的项目（即系统剪贴板项目）
+        // 如果是默认标签ID或者没有指定ID，返回系统剪贴板项目
+        if tabId == Self.defaultTabId || tabId == nil {
+            NSLog("返回默认标签(系统剪贴板)项目")
             return ClipboardStore.shared.items
+        } else {
+            // 返回自定义标签的项目
+            NSLog("返回自定义标签项目: \(tabId?.uuidString ?? "nil")")
+            return tabItems[tabId!] ?? []
         }
     }
     
@@ -113,49 +137,15 @@ class TabStore: ObservableObject {
             }
         }
     }
-}
-
-// 用于存储的可编码剪贴板项目
-struct EncodableClipboardItem: Codable {
-    let id: UUID
-    let type: String
-    let content: String
-    let timestamp: Date
     
-    init(from item: ClipboardItem) {
-        self.id = item.id
-        self.timestamp = item.timestamp
+    // 添加一个方法用于重置所有标签数据（用于调试）
+    func resetAllTabs() {
+        UserDefaults.standard.removeObject(forKey: saveKey)
+        UserDefaults.standard.removeObject(forKey: itemsKey)
         
-        switch item.type {
-        case .text(let string):
-            self.type = "text"
-            self.content = string
-        case .image:
-            self.type = "image"
-            self.content = "" // 图片暂不支持存储
-        case .file(let urls):
-            self.type = "file"
-            self.content = urls.map { $0.path }.joined(separator: "\n")
-        case .other(let type):
-            self.type = "other"
-            self.content = type
-        }
-    }
-    
-    func toClipboardItem() -> ClipboardItem? {
-        let clipboardType: ClipboardType
-        switch type {
-        case "text":
-            clipboardType = .text(content)
-        case "file":
-            let urls = content.split(separator: "\n").map { URL(fileURLWithPath: String($0)) }
-            clipboardType = .file(urls)
-        case "other":
-            clipboardType = .other(content)
-        default:
-            return nil
-        }
-        
-        return ClipboardItem(type: clipboardType, timestamp: timestamp)  // 移除 id 参数
+        tabs = [TabItem(id: Self.defaultTabId, name: "默认", isDefault: true)]
+        tabItems = [:]
+        saveTabs()
+        objectWillChange.send()
     }
 }

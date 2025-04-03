@@ -3,11 +3,13 @@ import Cocoa
 class EventMonitor {
     private var monitor: Any?
     private let mask: NSEvent.EventTypeMask
-    private let handler: (NSEvent?) -> Void
+    private let handler: (NSEvent?) -> NSEvent?
+    private let isGlobal: Bool
     
-    init(mask: NSEvent.EventTypeMask, handler: @escaping (NSEvent?) -> Void) {
+    init(mask: NSEvent.EventTypeMask, isGlobal: Bool = true, handler: @escaping (NSEvent?) -> NSEvent?) {
         self.mask = mask
         self.handler = handler
+        self.isGlobal = isGlobal
     }
     
     deinit {
@@ -15,7 +17,15 @@ class EventMonitor {
     }
     
     func start() {
-        monitor = NSEvent.addGlobalMonitorForEvents(matching: mask, handler: handler)
+        if isGlobal {
+            monitor = NSEvent.addGlobalMonitorForEvents(matching: mask) { [weak self] event in
+                _ = self?.handler(event)
+            }
+        } else {
+            monitor = NSEvent.addLocalMonitorForEvents(matching: mask) { [weak self] event in
+                return self?.handler(event) ?? event
+            }
+        }
     }
     
     func stop() {

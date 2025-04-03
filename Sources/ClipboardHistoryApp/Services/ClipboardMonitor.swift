@@ -3,10 +3,15 @@ import Cocoa
 class ClipboardMonitor {
     private var timer: Timer?
     private var lastChangeCount: Int = 0
+    private var isFirstTimeCheck = true
     
     func startMonitoring() {
+        // 首先检查一次剪贴板，获取当前内容
+        checkPasteboard(isInitialCheck: true)
+        
+        // 然后开始定时监控
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
-            self?.checkPasteboard()
+            self?.checkPasteboard(isInitialCheck: false)
         }
     }
     
@@ -15,12 +20,20 @@ class ClipboardMonitor {
         timer = nil
     }
     
-    private func checkPasteboard() {
+    private func checkPasteboard(isInitialCheck: Bool = false) {
         let pasteboard = NSPasteboard.general
-        if lastChangeCount == pasteboard.changeCount { return }
+        
+        // 只有在剪贴板变化或初始检查时才处理
+        if lastChangeCount == pasteboard.changeCount && !isInitialCheck { return }
         lastChangeCount = pasteboard.changeCount
         
-        NSLog("=========== 剪贴板变化检测 ===========")
+        if isInitialCheck {
+            NSLog("初始化剪贴板检查")
+            isFirstTimeCheck = false
+        } else {
+            NSLog("=========== 剪贴板变化检测 ===========")
+        }
+        
         NSLog("可用类型: \(pasteboard.types?.map { $0.rawValue } ?? [])")
         
         // 首先检查是否有文本，因为几乎所有类型都会包含文本

@@ -30,7 +30,7 @@ struct NSTextFieldWrapper: NSViewRepresentable {
             nsView.stringValue = text
         }
         
-        if isFocused {
+        if isFocused && nsView.window?.firstResponder != nsView {
             NSLog("标签输入框请求焦点")
             DispatchQueue.main.async {
                 nsView.window?.makeFirstResponder(nsView)

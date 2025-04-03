@@ -19,6 +19,7 @@ struct SearchBar: View {
                 .focused($isFocused)
                 .onAppear {
                     NSLog("搜索框出现")
+                    isFocused = false
                 }
                 .onTapGesture {
                     NSLog("搜索框被点击")

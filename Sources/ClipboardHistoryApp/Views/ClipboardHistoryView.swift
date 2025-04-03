@@ -20,9 +20,11 @@ struct ClipboardHistoryView: View {
                     .padding(.horizontal, 16)
                     .onTapGesture {
                         NSLog("搜索栏容器被点击")
+                        // 不执行任何获取焦点的代码
                     }
                     .onAppear {
                         NSLog("搜索栏出现")
+                        // 不执行任何获取焦点的代码
                     }
                 
                 // 修改分隔线逻辑，只在非默认标签时显示
@@ -44,12 +46,14 @@ struct ClipboardHistoryView: View {
                                     .cornerRadius(4)
                                     .onTapGesture {
                                         selectedTabId = tab.id
+                                        NSLog("切换到标签: \(tab.name), ID: \(tab.id)")
                                     }
                                     .contextMenu {
                                         Button("删除", role: .destructive) {
                                             tabStore.removeTab(tab)
                                             if selectedTabId == tab.id {
                                                 selectedTabId = TabStore.defaultTabId
+                                                NSLog("标签被删除，切换到默认标签")
                                             }
                                         }
                                     }
@@ -62,6 +66,7 @@ struct ClipboardHistoryView: View {
                                     .cornerRadius(4)
                                     .onTapGesture {
                                         selectedTabId = tab.id
+                                        NSLog("切换到默认标签, ID: \(tab.id)")
                                     }
                             }
                         }
@@ -89,6 +94,9 @@ struct ClipboardHistoryView: View {
                 .padding(.vertical, 16)  // 增加内容区域的上下间距
         }
         .background(Color(hex: "E7E7E7"))
+        .onAppear {
+            NSLog("剪贴板历史视图出现，当前标签ID: \(selectedTabId?.uuidString ?? "nil")")
+        }
         .alert("新建标签", isPresented: $showingNewTabAlert) {
             TextField("标签名称", text: $newTabName)
                 .frame(width: 200)  // 设置输入框宽度

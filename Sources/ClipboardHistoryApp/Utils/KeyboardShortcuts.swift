@@ -1,37 +1,32 @@
+import AppKit
+import Carbon
 import Cocoa
 
 class KeyboardShortcuts {
     static let shared = KeyboardShortcuts()
-    private var eventMonitor: Any?
-    private var handler: (() -> Void)?
-    private var escHandler: (() -> Void)?
+    
+    private var shortcutManager = ShortcutManager.shared
+    
+    private init() {
+        // 此类现在仅作为与ShortcutManager的兼容层
+        // 保留此类以兼容现有代码，避免大量修改
+    }
     
     func register(handler: @escaping () -> Void) {
-        self.handler = handler
-        
-        eventMonitor = NSEvent.addGlobalMonitorForEvents(
-            matching: [.keyDown]
-        ) { [weak self] event in
-            // Check for Cmd+Shift+V (⌘⇧V)
-            if event.modifierFlags.contains([.command, .shift]) && 
-               event.keyCode == 9 { // V key
-                self?.handler?()
-            }
-        }
+        // 注册到新的ShortcutManager
+        shortcutManager.registerHandler(for: .toggleClipboard, handler: handler)
     }
     
     func registerEscHandler(handler: @escaping () -> Void) {
-        self.escHandler = handler
+        // ESC处理现在由AppDelegate中的localEventMonitor处理
+        // 不再需要在此处实现
     }
     
-    func unregister() {
-        if let monitor = eventMonitor {
-            NSEvent.removeMonitor(monitor)
-            eventMonitor = nil
-        }
+    func unregisterEventMonitor() {
+        // 由ShortcutManager处理
     }
     
     deinit {
-        unregister()
+        // 不再需要手动清理
     }
 }

@@ -38,6 +38,7 @@ Icon
 build/
 DerivedData/
 *.dmg
+build-*/
 
 # IDE
 .idea/

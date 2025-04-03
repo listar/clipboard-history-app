@@ -11,7 +11,9 @@
     <key>CFBundleShortVersionString</key>
     <string>1.0</string>
     <key>CFBundleIconFile</key>
-    <string>icon_16x16.png</string>
+    <string>AppIcon</string>
+    <key>NSHighResolutionCapable</key>
+    <true/>
     <key>LSMinimumSystemVersion</key>
     <string>12.0</string>
     <key>LSUIElement</key>

@@ -12,6 +12,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var globalEventMonitor: Any?
     private var keyboardShortcuts: KeyboardShortcuts?
     
+    @AppStorage("launchAtLogin") private var launchAtLogin = true
+    
     override init() {
         super.init()
         // 确保在应用程序启动前就设置为菜单栏应用程序
@@ -20,53 +22,45 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationDidFinishLaunching(_ notification: Notification) {
-        // 所有设置之前，再次确认为.accessory模式，不在Dock显示
         NSApp.setActivationPolicy(.accessory)
         
-        setupStatusBar()
+        setupStatusItem()
+        setupClipboardWindow()
+        
+        // 初始化快捷键管理器并注册处理函数
         setupKeyboardShortcuts()
+        
+        // 设置剪贴板监控
         clipboardMonitor = ClipboardMonitor()
         clipboardMonitor?.startMonitoring()
         
+        if launchAtLogin {
+            // 处理登录启动逻辑
+            // 如果需要此功能，请引入相关框架，例如ServiceManagement
+        }
+        
         // 添加日志
-        NSLog("应用程序启动完成，激活策略: accessory")
+        NSLog("应用已启动")
         
         // 确认菜单栏图标是否已创建
         if statusBarItem?.button?.image == nil {
             NSLog("警告: 菜单栏图标未能正确创建")
             // 再次尝试设置图标
-            statusBarItem?.button?.image = NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: "Clipboard History")
+            let systemIcon = NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: "Clipboard History")
+            systemIcon?.size = NSSize(width: 18, height: 18) 
+            statusBarItem?.button?.image = systemIcon
         }
     }
     
-    private func setupStatusBar() {
+    private func setupStatusItem() {
         NSLog("开始设置状态栏")
         statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         
-        // 使用自定义图标 - 优先尝试从main bundle加载
-        if let iconImage = NSImage(named: "icon_16x16") {
-            NSLog("通过named方法找到图标")
-            iconImage.size = NSSize(width: 18, height: 18)
-            statusBarItem?.button?.image = iconImage
-        }
-        // 尝试直接从bundle中加载图标文件
-        else if let iconURL = Bundle.main.url(forResource: "icon_16x16", withExtension: "png"),
-                let iconImage = NSImage(contentsOf: iconURL) {
-            NSLog("通过文件URL加载图标: \(iconURL.path)")
-            iconImage.size = NSSize(width: 18, height: 18)
-            statusBarItem?.button?.image = iconImage
-        }
-        // 从Assets中加载
-        else if let iconImage = NSImage(named: "AppIcon") {
-            NSLog("通过AppIcon named方法找到图标")
-            iconImage.size = NSSize(width: 18, height: 18)
-            statusBarItem?.button?.image = iconImage
-        }
-        // 如果找不到自定义图标，使用系统图标作为备选
-        else {
-            NSLog("无法加载自定义图标，使用系统图标")
-            statusBarItem?.button?.image = NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: "Clipboard History")
-        }
+        // 直接使用系统图标作为菜单栏图标
+        NSLog("使用系统图标")
+        let systemIcon = NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: "Clipboard History")
+        systemIcon?.size = NSSize(width: 18, height: 18)
+        statusBarItem?.button?.image = systemIcon
         
         // 检查是否成功设置图标
         if statusBarItem?.button?.image == nil {
@@ -90,7 +84,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Attach menu to status item
         statusBarItem?.menu = menu
-        
+    }
+    
+    private func setupClipboardWindow() {
         // 设置剪贴板窗口
         clipboardWindow = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: NSScreen.main?.frame.width ?? 800, height: 300),
@@ -127,25 +123,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         clipboardWindow?.backgroundColor = .windowBackgroundColor
     }
     
-    private func setupKeyboardShortcuts() {
-        // 使用KeyboardShortcuts类来处理全局快捷键
-        keyboardShortcuts = KeyboardShortcuts.shared
-        keyboardShortcuts?.register {
-            DispatchQueue.main.async { [weak self] in
-                self?.togglePopover(nil)
+    func setupKeyboardShortcuts() {
+        // 使用ShortcutManager注册全局快捷键
+        registerGlobalShortcuts()
+        
+        // 本地快捷键监控（ESC键）
+        localEventMonitor = EventMonitor(mask: .keyDown, isGlobal: false) { [weak self] event in
+            if event?.keyCode == 53 { // ESC key
+                self?.hideClipboardWindow()
+                return nil
             }
+            return event
+        }
+        (localEventMonitor as? EventMonitor)?.start()
+    }
+    
+    private func registerGlobalShortcuts() {
+        ShortcutManager.shared.registerHandler(for: .toggleClipboard) { [weak self] in
+            self?.togglePopover(nil)
         }
         
-        // 继续保留本地事件监听（用于处理其他快捷键，如ESC等）
-        localEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
-            // 只处理ESC键
-            if event.keyCode == 53 && self?.clipboardWindow?.isVisible == true {
-                DispatchQueue.main.async {
-                    self?.hideClipboardWindow()
-                }
-                return nil // 事件被处理，不再传递
-            }
-            return event // 继续传递事件
+        ShortcutManager.shared.registerHandler(for: .clearHistory) { [weak self] in
+            self?.clearHistory()
+        }
+        
+        ShortcutManager.shared.registerHandler(for: .openPreferences) { [weak self] in
+            self?.showPreferences(nil)
         }
     }
     
@@ -193,23 +196,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         clipboardWindow?.orderOut(nil)
     }
     
-    func applicationWillTerminate(_ notification: Notification) {
-        // 移除所有事件监听器
-        if let localMonitor = localEventMonitor {
-            NSEvent.removeMonitor(localMonitor)
-        }
+    deinit {
+        NSLog("AppDelegate deinit")
         
         // 注销KeyboardShortcuts
-        keyboardShortcuts?.unregister()
+        keyboardShortcuts?.unregisterEventMonitor()
         
         clipboardMonitor?.stopMonitoring()
+        
+        // 销毁前取消快捷键注册
+        ShortcutManager.shared.unregisterAllHandlers()
+        (localEventMonitor as? EventMonitor)?.stop()
     }
     
     @objc private func clearHistory() {
         ClipboardStore.shared.clearItems()
     }
     
-    @objc private func showPreferences() {
+    @objc private func showPreferences(_ sender: Any?) {
         // 如果窗口已经存在，就把它带到前面
         if let window = preferencesWindow {
             window.makeKeyAndOrderFront(nil)
